@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "nomad-python-web-croller"
+version = "0.1.0"
+description = ""
+authors = ["김재만 <daga4242@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "nomad_python_web_croller"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+beautifulsoup4 = "^4.11.1"
+requests = "^2.28.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
