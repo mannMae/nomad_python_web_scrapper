@@ -1,17 +1,17 @@
-from requests import get
-from bs4 import BeautifulSoup
+from extractors.indeed import extract_indeed_jobs
+from extractors.wwr import extract_wwr_jobs
 
-base_url = "https://weworkremotely.com/remote-jobs/search?term="
+keyword = input("Keyword?")
+indeed = extract_indeed_jobs(keyword)
+wwr = extract_wwr_jobs(keyword)
+jobs = indeed + wwr
 
-search_term = "python"
+file = open(f"{keyword}.csv", "w")
+file.write("Position,Company,Location,URL")
 
-response = get(f"{base_url}{search_term}")
-if response.status_code != 200:
-    print("Can't request website")
-else:
-    print(response.text)
-    
-    
-soup = BeautifulSoup(response.text, "html.parser")
-# print(soup.find_all("title"))
-print(soup.find_all("section", class_="jobs"))
+for job in jobs:
+    file.write(f"{job['position']},{job['company']},{job['location']},{job['link']}\n")
+
+file.close()
+
+
